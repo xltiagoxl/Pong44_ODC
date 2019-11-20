@@ -4,14 +4,14 @@
 // File name: projects/11/Pong/Bat.jack
 
 /**
- * A graphical Pong bat. 
- * Displayed as a filled horizontal rectangle that has 
+ * A graphical Pong bat.
+ * Displayed as a filled horizontal rectangle that has
  * a screen location, a width and a height.
- * Has methods for drawing, erasing, moving left and right, 
+ * Has methods for drawing, erasing, moving left and right,
  * and changing its width (to make the hitting action more challenging).
- * This class should have been called "paddle", following the 
+ * This class should have been called "paddle", following the
  * standard Pong terminology. But, unaware of this terminology,
- * we called it "bat", and then decided to stick to it. 
+ * we called it "bat", and then decided to stick to it.
  */
 class Bat {
 
@@ -30,6 +30,16 @@ class Bat {
         return this;
     }
 
+    constructor Bat new2(int Ax, int Ay, int Awidth, int Aheight) {
+        let x = Ax;
+        let y = Ay;
+        let width = Awidth;
+        let height = Aheight;
+        let direction = 3;
+        do showy();
+        return this;
+    }
+
     /** Deallocates the object's memory. */
     method void dispose() {
         do Memory.deAlloc(this);
@@ -43,6 +53,12 @@ class Bat {
         return;
     }
 
+    method void showy() {
+        do Screen.setColor(true);
+        do drawy();
+        return;
+    }
+
     /** Hides the bat. */
     method void hide() {
         do Screen.setColor(false);
@@ -50,9 +66,21 @@ class Bat {
         return;
     }
 
+    method void hidey() {
+        do Screen.setColor(false);
+        do drawy();
+        return;
+    }
+
+
     /** Draws the bat. */
     method void draw() {
         do Screen.drawRectangle(x, y, x + width, y + height);
+        return;
+    }
+
+    method void drawy() {
+        do Screen.drawRectangle(x, y, x + height, y + width);
         return;
     }
 
@@ -72,6 +100,16 @@ class Bat {
         return x + width;
     }
 
+
+    method int getyLeft() {
+        return y;
+    }
+
+    /** Returns the bat's right edge. */
+    method int getyRight() {
+        return y + width;
+    }
+
     /** Sets the bat's width. */
     method void setWidth(int Awidth) {
         do hide();
@@ -79,6 +117,30 @@ class Bat {
         do show();
         return;
     }
+
+    method void setHeight(int Aheight) {
+        do hide();
+        let height = Aheight;
+        do show();
+        return;
+    }
+
+
+    method void setHeighty(int Aheight) {
+        do hidey();
+        let height = Aheight;
+        do showy();
+        return;
+    }
+
+    method void setWidthy(int Awidth) {
+        do hidey();
+        let width = Awidth;
+        do showy();
+        return;
+    }
+
+
 
     /** Moves the bat one step in the bat's direction. */
     method void move() {
@@ -92,7 +154,7 @@ class Bat {
         }
         else {
             let x = x + 4;
-            if ((x + width) > 511) { let x = 511 - width; }
+            if ((x + width) > 503) { let x = 503 - width; }
             do Screen.setColor(false);
             do Screen.drawRectangle(x - 4, y, x - 1, y + height);
             do Screen.setColor(true);
@@ -100,4 +162,29 @@ class Bat {
         }
         return;
     }
+
+
+
+    method void movey() {
+      if (direction = 3) {
+             let y = y - 4;
+             if (y < 7) { let y = 7; }
+             do Screen.setColor(false);
+             do Screen.drawRectangle(x, (y+width)+1, x+height , (y+width)+ 4);
+             do Screen.setColor(true);
+             do Screen.drawRectangle(x, y, x + height, y + 3);
+         }
+         else {
+             let y = y + 4;
+             if ((y + width) > 230) { let y = 230 - width; }
+             do Screen.setColor(false);
+             do Screen.drawRectangle(x , y-4, x + height, y -1);
+             do Screen.setColor(true);
+             do Screen.drawRectangle(x, (y+width)-3, x + height, y + width);
+         }
+         return;
+     }
+
+
+
 }
