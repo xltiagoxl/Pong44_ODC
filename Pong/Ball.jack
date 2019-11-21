@@ -70,12 +70,12 @@ class Ball {
         return x + 5;
     }
 
-
+    /** Returns the ball's up edge. */
     method int getyLeft() {
         return y;
     }
 
-    /** Returns the ball's right edge. */
+    /** Returns the ball's dow edge. */
     method int getyRight() {
         return y + 5;
     }
