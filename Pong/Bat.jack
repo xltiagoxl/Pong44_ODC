@@ -17,7 +17,7 @@ class Bat {
 
     field int x, y;           // the bat's screen location
     field int width, height;  // the bat's width and height
-    field int direction;      // direction of the bat's movement (1 = left, 2 = right)
+    field int direction;      // direction of the bat's movement (1 = left, 2 = right, 3 up, 4 dow)
 
     /** Constructs a new bat with the given location and width. */
     constructor Bat new(int Ax, int Ay, int Awidth, int Aheight) {
@@ -29,7 +29,7 @@ class Bat {
         do show();
         return this;
     }
-
+    /** the second constructs a new bat with the given location and width. */
     constructor Bat new2(int Ax, int Ay, int Awidth, int Aheight) {
         let x = Ax;
         let y = Ay;
@@ -52,7 +52,8 @@ class Bat {
         do draw();
         return;
     }
-
+    
+    /** Shows the bat in the y location. */
     method void showy() {
         do Screen.setColor(true);
         do drawy();
@@ -66,6 +67,8 @@ class Bat {
         return;
     }
 
+
+    /** Hides the bat in the y location. */
     method void hidey() {
         do Screen.setColor(false);
         do drawy();
@@ -79,12 +82,13 @@ class Bat {
         return;
     }
 
+   /** Draws the bat in the y location. */
     method void drawy() {
         do Screen.drawRectangle(x, y, x + height, y + width);
         return;
     }
 
-    /** Sets the bat's direction (0=stop, 1=left, 2=right). */
+    /** Sets the bat's direction (0=stop, 1=left, 2=right,3=up , 4 = dow). */
     method void setDirection(int Adirection) {
         let direction = Adirection;
         return;
@@ -100,12 +104,12 @@ class Bat {
         return x + width;
     }
 
-
+    /** Returns the bat's up edge. */
     method int getyLeft() {
         return y;
     }
 
-    /** Returns the bat's right edge. */
+    /** Returns the bat's dow edge. */
     method int getyRight() {
         return y + width;
     }
@@ -118,6 +122,7 @@ class Bat {
         return;
     }
 
+    /** Sets the bat's height. */
     method void setHeight(int Aheight) {
         do hide();
         let height = Aheight;
@@ -125,15 +130,17 @@ class Bat {
         return;
     }
 
-
+    /** Sets the bat´s height on the y-axis. */
     method void setHeighty(int Aheight) {
         do hidey();
         let height = Aheight;
         do showy();
         return;
     }
-
-    method void setWidthy(int Awidth) {
+	
+	
+	/** Sets the bat´s width on the y-axis. */
+	method void setWidthy(int Awidth) {
         do hidey();
         let width = Awidth;
         do showy();
@@ -164,7 +171,7 @@ class Bat {
     }
 
 
-
+    /** Moves the bat one step in the bat's direction on the y-axis. */
     method void movey() {
       if (direction = 3) {
              let y = y - 4;
